@@ -65,6 +65,11 @@ class AuthSAML extends AuthPluginBase
             'label' => 'Auto update users',
             'default' => true,
         ),
+	'auto_create_surveys' => array(
+            'type' => 'checkbox',
+            'label' => 'Auto create surveys',
+            'default' => true,
+        ),
         'force_saml_login' => array(
             'type' => 'checkbox',
             'label' => 'Force SAML login.',
@@ -212,6 +217,12 @@ class AuthSAML extends AuthPluginBase
                     {
                         Permission::model()->insertSomeRecords(array('uid' => $iNewUID, 'permission' => Yii::app()->getConfig("defaulttemplate"),   'entity'=>'template', 'read_p' => 1));
 
+			// Set permissions: Create surveys
+	                $auto_create_surveys = $this->get('auto_create_surveys', null, null, true);
+	                if ($auto_create_surveys) {
+		        	Permission::model()->setGlobalPermission($iNewUID, 'surveys', array('create_p'));
+	                }
+			
                         // read again user from newly created entry
                         $oUser = $this->api->getUserByName($sUser);
 
