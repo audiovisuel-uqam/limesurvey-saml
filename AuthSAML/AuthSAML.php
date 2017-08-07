@@ -128,12 +128,6 @@ class AuthSAML extends AuthPluginBase
         }
     }
 
-    public function afterLogout()
-    {
-        $ssp = $this->get_saml_instance();
-        $ssp->logout();
-    }
-
     public function newLoginForm()
     {
         $authtype_base = $this->get('authtype_base', null, null, 'Authdb');
