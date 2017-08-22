@@ -67,7 +67,7 @@ class AuthSAML extends AuthPluginBase
         ),
 	'user_create_surveys' => array(
             'type' => 'checkbox',
-            'label' => 'Permission: Users can Create surveys',
+            'label' => 'Permission: New users can Create surveys',
             'default' => true,
         ),
         'force_saml_login' => array(
